@@ -1,0 +1,28 @@
+workflows:
+  android-release:
+    name: NoPen Android
+    max_build_duration: 60
+    environment:
+      flutter: stable
+      java: 17
+      vars:
+        PACKAGE_NAME: "com.nopen.app"
+    scripts:
+      - name: Create Android platform
+        script: |
+          flutter create --platforms=android --org com.nopen --project-name nopen .
+          cp native/MainActivity.kt android/app/src/main/kotlin/com/nopen/app/MainActivity.kt
+          cp native/AndroidManifest.xml android/app/src/main/AndroidManifest.xml
+      - name: Install dependencies
+        script: flutter pub get
+      - name: Static analysis
+        script: flutter analyze
+      - name: Tests
+        script: flutter test
+      - name: Build APK
+        script: |
+          flutter build apk --release \
+            --dart-define=MS_CLIENT_ID="$MS_CLIENT_ID" \
+            --dart-define=MS_REDIRECT_URI="$MS_REDIRECT_URI"
+    artifacts:
+      - build/app/outputs/flutter-apk/*.apk
