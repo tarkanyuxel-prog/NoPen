@@ -1,4 +1,4 @@
-package com.nopen.app
+package com.nopen.nopen
 
 import android.content.Intent
 import android.os.Bundle
