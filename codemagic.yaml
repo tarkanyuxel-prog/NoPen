@@ -11,7 +11,7 @@ workflows:
       - name: Create Android platform
         script: |
           flutter create --platforms=android --org com.nopen --project-name nopen .
-          cp native/MainActivity.kt android/app/src/main/kotlin/com/nopen/app/MainActivity.kt
+          cp native/MainActivity.kt android/app/src/main/kotlin/com/nopen/nopen/MainActivity.kt
           cp native/AndroidManifest.xml android/app/src/main/AndroidManifest.xml
       - name: Install dependencies
         script: flutter pub get
